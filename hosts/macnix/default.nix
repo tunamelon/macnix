@@ -8,13 +8,18 @@
   programs.zsh.enable = true;
   system.defaults.dock.autohide = true;
   
+  users.users.tuna = {
+    name = "tuna";
+    home = "/Users/tuna";
+  };
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.tuna = { pkgs, ... }: {
     
     # User home directory
-    home.username = "tuna";
-    home.homeDirectory = lib.mkForce "/Users/tuna/";
+    #home.username = "tuna";
+    #home.homeDirectory = lib.mkForce "/Users/tuna/";
     
     # Home-manager pkgs version
     home.stateVersion = "22.11";
@@ -24,6 +29,13 @@
       PATH = "/Users/tuna/.nix-profile/bin:/etc/profiles/per-user/tuna/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/homebrew/bin";
     };
 
+     #############
+    # Add packages
+    home.packages = with pkgs; [
+      htop
+    ];
+    
+     #############
     # Add programs  
 
     programs.btop = {
@@ -35,6 +47,8 @@
     };
 
     programs.home-manager.enable = true;
+
+    programs.kitty.enable = true;
 
     programs.tmux = {
       enable = true;
@@ -53,6 +67,11 @@
 
     programs.zsh = {
       enable = true;
+      oh-my-zsh = {
+        enable = true;
+          #plugins = [ "git" "thefuck" ];
+        theme = "robbyrussell";
+      };
       shellAliases  = {
         # May need to re-run after OS updates
         source-nix="echo 'if test -e /etc/static/zshrc; then . /etc/static/zshrc; fi' | sudo tee -a /etc/zshrc";
