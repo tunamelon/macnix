@@ -11,7 +11,9 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.tuna = { pkgs, ... }: {
-  users.users.tuna.home = "/Users/tuna/"
+    
+    # User home directory
+    home.homeDirectory = lib.mkForce "/Users/tuna/";
     
     # Home-manager pkgs version
     home.stateVersion = "22.11";
