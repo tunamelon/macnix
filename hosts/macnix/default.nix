@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, inputs, ... }:
 
 {
 
@@ -18,6 +18,11 @@
     
     # Home-manager pkgs version
     home.stateVersion = "22.11";
+
+    # Shell session variables
+    home.sessionVariables = {
+      PATH = "/Users/tuna/.nix-profile/bin:/etc/profiles/per-user/tuna/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/homebrew/bin";
+    };
 
     # Add programs  
 
@@ -57,6 +62,10 @@
         nix-flake-update="nix flake update";
         # Update flake after updating 23.11 version in flake and home-manager manually
         nix-updated="nix-flake-update && nix-switch";
+        # Edit default
+        nix-default="nano ~/macnix/hosts/macnix/default.nix";
+        # Edit and switch
+        nix-default-switch="nix-default && nix-switch";
       };
     };
   
@@ -71,6 +80,8 @@
     # updates homebrew packages on activation,
     # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
     casks = [
+      # Add below to auto-install, but requires manual uninstalling with: brew uninstall --cask iina
+      # Can verify uninstalled with: brew list --cask
       # "iina"
     ];
   };

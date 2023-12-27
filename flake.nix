@@ -10,11 +10,12 @@
       darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   
-  outputs = { self, nixpkgs, home-manager, darwin }: {
+  outputs = { self, nixpkgs, home-manager, darwin, ... }: {
     darwinConfigurations."macnix" = darwin.lib.darwinSystem {
     # you can have multiple darwinConfigurations per flake, one per hostname
 
       system = "aarch64-darwin"; # "x86_64-darwin" if you're using a pre M1 mac
+      #specialArgs = {inherit inputs;};
       modules = [
         home-manager.darwinModules.home-manager
         ./hosts/macnix/default.nix
