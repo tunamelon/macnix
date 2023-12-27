@@ -1,0 +1,2 @@
+# macnix
+MacOS Nix Config
